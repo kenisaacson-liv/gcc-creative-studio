@@ -110,7 +110,7 @@ export class VideoComponent implements OnInit, AfterViewInit {
   // This object holds the current state of all user selections.
   searchRequest: VeoRequest = {
     prompt: '',
-    generationModel: 'veo-3.1-generate-preview',
+    generationModel: 'veo-3.0-generate-001',
     aspectRatio: '16:9',
     numberOfMedia: 4,
     style: null,
@@ -564,21 +564,6 @@ export class VideoComponent implements OnInit, AfterViewInit {
       'veo-3.0-generate-001',
     ].includes(this.searchRequest.generationModel);
 
-    if (
-      (hasSourceAssets || hasSourceMediaItems) &&
-      isVeo3 &&
-      !this.isExtensionMode &&
-      !this.isConcatenateMode
-    ) {
-      const veo31Model = this.generationModels.find(
-        m => m.value === 'veo-3.1-generate-preview',
-      );
-      if (veo31Model) {
-        this.selectModel(veo31Model);
-        handleSuccessSnackbar(this._snackBar, "Veo 3 doesn't support images as input, so we've switched to Veo 3.1 for you.");
-        return;
-      }
-    }
 
     this.isLoading = true;
     this.videoDocuments = null;
@@ -820,25 +805,6 @@ export class VideoComponent implements OnInit, AfterViewInit {
         );
 
     if (isVideo) {
-      // If we are in Extend Video mode, we don't need to force a switch if the model supports it.
-      // Veo 3.1 supports video extension.
-      const isVeo30 = [
-        'veo-3.0-fast-generate-001',
-        'veo-3.0-generate-001',
-      ].includes(this.searchRequest.generationModel);
-
-      if (isVeo30) {
-        const veo31Model = this.generationModels.find(
-          m => m.value === 'veo-3.1-generate-preview',
-        );
-        if (veo31Model) {
-          this.selectModel(veo31Model);
-          handleSuccessSnackbar(
-            this._snackBar,
-            "Veo 3.0 doesn't support video as input, so we've switched to Veo 3.1 for you.",
-          );
-        }
-      }
     }
     this.clearSourceMediaItem(imageNumber);
     this.clearImageAssetId(imageNumber);
@@ -1340,20 +1306,6 @@ export class VideoComponent implements OnInit, AfterViewInit {
         this.sourceMediaItems[1] = null;
         this.updateModeAndNotify();
         this._snackBar.open(snackbarMessage, 'OK', { duration: 5000 });
-      }
-
-      const veo31Model = this.generationModels.find(
-        m => m.value === 'veo-3.1-generate-preview',
-      );
-      if (
-        veo31Model &&
-        this.searchRequest.generationModel !== veo31Model.value
-      ) {
-        this.selectModel(veo31Model);
-        handleSuccessSnackbar(
-          this._snackBar,
-          "We've switched to the Veo 3.1 model for you, as this one supports reference images.",
-        );
       }
     }
   }
