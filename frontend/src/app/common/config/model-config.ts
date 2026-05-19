@@ -196,20 +196,20 @@ export const MODEL_CONFIGS: GenerationModelConfig[] = [
     },
   },
   // --- Video Models ---
-  {
-    value: 'veo-3.1-generate-preview',
-    viewValue: 'Veo 3.1 \n (Beta Audio)',
-    type: 'VIDEO',
-    icon: 'volume_up',
-    capabilities: {
-      supportedModes: ['Text to Video', 'Ingredients to Video', 'Frames to Video'], // Assuming ingredients = image-to-video
-      maxReferenceImages: 3,
-      supportedAspectRatios: ['16:9', '9:16'],
-      supportsAudio: true,
-    },
-  },
-  {
-    value: 'veo-3.0-generate-001',
+ // {
+  //  value: 'veo-3.1-generate-preview',
+  //  viewValue: 'Veo 3.1 \n (Beta Audio)',
+  //  type: 'VIDEO',
+   // icon: 'volume_up',
+   // capabilities: {
+   //   supportedModes: ['Text to Video', 'Ingredients to Video', 'Frames to Video'], // Assuming ingredients = image-to-video
+   //   maxReferenceImages: 3,
+    //  supportedAspectRatios: ['16:9', '9:16'],
+    //  supportsAudio: true,
+   // },
+//  },
+ {
+   value: 'veo-3.0-generate-001',
     viewValue: 'Veo 3 Quality \n (Beta Audio)',
     type: 'VIDEO',
     icon: 'volume_up',
